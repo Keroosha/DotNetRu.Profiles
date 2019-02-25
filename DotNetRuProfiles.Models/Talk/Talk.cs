@@ -1,6 +1,6 @@
-namespace DotNetRuProfiles.Models.Lecture
+namespace DotNetRuProfiles.Models.Talk
 {
-    public class Lecture
+    public class Talk
     {
         public string Name { get; set; }
         public string Description { get; set; }

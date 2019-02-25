@@ -2,6 +2,8 @@
 using System.Threading.Tasks;
 using DotNetRuGrains.Profile;
 using DotNetRuGrains.Wiki;
+using DotNetRuProfiles.Markdown;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Orleans;
 using Orleans.Configuration;
@@ -49,6 +51,10 @@ namespace DotNetRuSilo
                 {
                     parts.AddApplicationPart(typeof(WikiFetcherGrain).Assembly).WithReferences();
                     parts.AddApplicationPart(typeof(ProfileGrain).Assembly).WithReferences();
+                })
+                .ConfigureServices(services =>
+                {
+                    services.AddSingleton<IMarkdownParser>(new MarkdownParser());
                 })
                 .ConfigureLogging(logging => logging.AddConsole());
 

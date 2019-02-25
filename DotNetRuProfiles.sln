@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetRuGrainsInterfaces", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetRuProfiles.Models", "DotNetRuProfiles.Models\DotNetRuProfiles.Models.csproj", "{CACFB98F-C1E2-4BB8-821A-9501099FD483}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetRuProfiles.Markdown", "DotNetRuProfiles.Markdown\DotNetRuProfiles.Markdown.csproj", "{52384585-DE80-4E3E-9DF2-4EA10CB3F5E2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +40,10 @@ Global
 		{CACFB98F-C1E2-4BB8-821A-9501099FD483}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CACFB98F-C1E2-4BB8-821A-9501099FD483}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CACFB98F-C1E2-4BB8-821A-9501099FD483}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52384585-DE80-4E3E-9DF2-4EA10CB3F5E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52384585-DE80-4E3E-9DF2-4EA10CB3F5E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52384585-DE80-4E3E-9DF2-4EA10CB3F5E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52384585-DE80-4E3E-9DF2-4EA10CB3F5E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2D425196-94F6-40FF-A6F1-F19A7707FB49} = {3CEA887A-80B9-4DE7-AE5C-36168971A09B}

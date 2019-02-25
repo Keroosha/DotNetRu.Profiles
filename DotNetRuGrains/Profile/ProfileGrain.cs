@@ -2,8 +2,11 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using DotNetRuGrainsInterfaces.Profile;
+using DotNetRuProfiles.Markdown;
+using DotNetRuProfiles.Markdown.Profile;
 using DotNetRuProfiles.Models.Profile;
 using Markdig;
+using Markdig.Parsers;
 using Markdig.Syntax;
 using Markdig.Syntax.Inlines;
 using Microsoft.Extensions.Logging;
@@ -14,10 +17,12 @@ namespace DotNetRuGrains.Profile
     public class ProfileGrain : Grain, IProfileGrain
     {
         private ILogger<ProfileGrain> _logger;
+        private IMarkdownParser _markdownParser; 
 
-        public ProfileGrain(ILogger<ProfileGrain> logger)
+        public ProfileGrain(ILogger<ProfileGrain> logger, IMarkdownParser markdownParser)
         {
             _logger = logger;
+            _markdownParser = markdownParser;
         }
 
         public async Task<DotNetRuProfiles.Models.Profile.Profile> GetProfile(GrainCancellationToken grainCancellationToken)
@@ -28,38 +33,9 @@ namespace DotNetRuGrains.Profile
                 $"{this.GetPrimaryKeyString()}.md"
             );
             
-            var file = File.ReadAllText(path);
+            var file = await File.ReadAllTextAsync(path);
 
-            var fields = Markdown
-                .Parse(file);
-            
-            var headingText = ((LiteralInline) ((HeadingBlock)fields
-                .First(x => x.GetType() == typeof(HeadingBlock)))
-                    .Inline.First())
-                .ToString();
-            
-            var description = ((LiteralInline) ((ParagraphBlock) fields
-                .Last(x => x is ParagraphBlock))
-                    .Inline.First())
-                .ToString();
-
-            var workplaceInfo = (((ParagraphBlock) fields
-                .Where(x => x is ParagraphBlock).Skip(1).First())
-                .Inline);
-
-            var workplaceName = ((LiteralInline) ((LinkInline) workplaceInfo.LastChild)
-                .First(x => x is LiteralInline))
-                .ToString();
-            
-            var workplaceLink = ((LinkInline) workplaceInfo.LastChild).Url;
-            
-            return new DotNetRuProfiles.Models.Profile.Profile
-            {
-                Name = headingText,
-                Description = description,
-                WorkplaceUrl = workplaceLink,
-                WorkplaceName = workplaceName
-            };
+            return await _markdownParser.Extract<DotNetRuProfiles.Models.Profile.Profile>(file);
         }
     }
 }
