@@ -11,8 +11,8 @@ namespace DotNetRuProfiles.Markdown
         private readonly Dictionary<Type, Type> _handlers = new Dictionary<Type, Type>();
 
         private readonly Func<Type, bool> _typeConventionFunc = (i) => 
-            i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IMarkdownParserHandler<>);     
-        
+            i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IMarkdownParserHandler<>);
+  
         public MarkdownParser()
         {
             var handlerTypes = typeof(MarkdownParser).Assembly
